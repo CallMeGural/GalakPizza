@@ -5,7 +5,7 @@
         <mat-label>Imię</mat-label>
         <input matInput type="text" id="firstName" name="firstName" class="form-control" formControlName="firstName">
         <div *ngIf="registrationForm.get('firstName')?.invalid && (registrationForm.get('firstName')?.dirty || registrationForm.get('firstName')?.touched)">
-          <div *ngIf="registrationForm.get('firstName')?.hasError('required')">First name is required</div>
+          <div *ngIf="registrationForm.get('firstName')?.hasError('required')">Imię jest wymagane</div>
         </div>
       </mat-form-field>
 
@@ -13,7 +13,7 @@
         <mat-label>Nazwisko</mat-label>
         <input matInput type="text" id="lastName" name="lastName" class="form-control" formControlName="lastName">
         <div *ngIf="registrationForm.get('lastName')?.invalid && (registrationForm.get('lastName')?.dirty || registrationForm.get('lastName')?.touched)">
-          <div *ngIf="registrationForm.get('lastName')?.hasError('required')">Last name is required</div>
+          <div *ngIf="registrationForm.get('lastName')?.hasError('required')">Nazwisko jest wymagane</div>
         </div>
       </mat-form-field>
     </div>
@@ -23,8 +23,7 @@
         <mat-label>Nazwa użytkownika</mat-label>
         <input matInput type="username" id="username" name="username" class="form-control" formControlName="username">
         <div *ngIf="registrationForm.get('username')?.invalid && (registrationForm.get('username')?.dirty || registrationForm.get('username')?.touched)">
-          <div *ngIf="registrationForm.get('username')?.hasError('required')">username is required</div>
-          <div *ngIf="registrationForm.get('username')?.hasError('username')">username must be a valid username address</div>
+          <div *ngIf="registrationForm.get('username')?.hasError('required')">Nazwa użytkownika jest wymagana</div>
         </div>
       </mat-form-field>
 
@@ -32,33 +31,33 @@
         <mat-label>Numer telefonu</mat-label>
         <input matInput type="phoneNumber" id="phoneNumber" name="phoneNumber" class="form-control" formControlName="phoneNumber">
         <div *ngIf="registrationForm.get('phoneNumber')?.invalid && (registrationForm.get('phoneNumber')?.dirty || registrationForm.get('phoneNumber')?.touched)">
-          <div *ngIf="registrationForm.get('phoneNumber')?.hasError('required')">Phone number is required</div>
-          <div *ngIf="registrationForm.get('phoneNumber')?.hasError('pattern')">Phone number must be a valid phone number</div>
+          <div *ngIf="registrationForm.get('phoneNumber')?.hasError('required')">Numer telefonu jest wymagany</div>
+          <div *ngIf="registrationForm.get('phoneNumber')?.hasError('pattern')">Numer telefonu ma niepoprawną formę</div>
         </div>
       </mat-form-field>
     </div>
     
     <div>
       <mat-form-field appearance="fill" style="padding: 5px;">
-        <mat-label for="password">Password</mat-label>
+        <mat-label for="password">Hasło</mat-label>
         <input matInput type="password" id="password" name="password" class="form-control" formControlName="password">
         <div *ngIf="registrationForm.get('password')?.invalid && (registrationForm.get('password')?.dirty || registrationForm.get('password')?.touched)">
-          <div *ngIf="registrationForm.get('password')?.hasError('required')">Password is required</div>
-          <div *ngIf="registrationForm.get('password')?.hasError('minlength')">Password must be at least 8 characters long</div>
+          <div *ngIf="registrationForm.get('password')?.hasError('required')">Hasło jest wymagane</div>
+          <div *ngIf="registrationForm.get('password')?.hasError('minlength')">Hasło musi mieć przynajmniej 8 znaków</div>
         </div>
       </mat-form-field>
 
       <mat-form-field appearance="fill" style="padding: 5px;">
-        <mat-label for="confirmPassword">Confirm Password</mat-label>
+        <mat-label for="confirmPassword">Potwierdź hasło</mat-label>
         <input matInput type="password" id="confirmPassword" name="confirmPassword" class="form-control" formControlName="confirmPassword">
         <div *ngIf="registrationForm.get('confirmPassword')?.invalid && (registrationForm.get('confirmPassword')?.dirty || registrationForm.get('confirmPassword')?.touched)">
-          <div *ngIf="registrationForm.get('confirmPassword')?.hasError('required')">Confirm password is required</div>
-          <div *ngIf="registrationForm.get('confirmPassword')?.hasError('mustMatch')">Passwords must match</div>
+          <div *ngIf="registrationForm.get('confirmPassword')?.hasError('required')">Potwierdź hasło</div>
+          <div *ngIf="registrationForm.get('confirmPassword')?.hasError('mustMatch')">Hasło nie jest takie samo</div>
         </div>
       </mat-form-field>
     </div>
     
-    <button type="submit" class="btn btn-primary">Register</button>
+    <button type="submit" mat-button>Zarejestruj</button>
   </form>
 </div>
   

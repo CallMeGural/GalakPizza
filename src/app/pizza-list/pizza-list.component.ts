@@ -31,13 +31,17 @@ export class PizzaListComponent implements OnInit {
       this.user$=this.storageService.getUserFromToken();
       this.user$.subscribe(
         data => {
-          this.user.firstname=data.firstname;
-          this.user.lastname=data.lastname;
-          this.user.role=data.role;
-          this.user.phoneNumber=data.phoneNumber;
-          this.user.username=data.username;
-          if(this.user.role=='ADMIN') this.displayedColumns=['name', 'ingredients', 'sizes','card','edit','delete'];
-          else this.displayedColumns=['name', 'ingredients', 'sizes','card'];
+          if(data) {
+            this.user.firstname=data.firstname;
+            this.user.lastname=data.lastname;
+            this.user.role=data.role;
+            this.user.phoneNumber=data.phoneNumber;
+            this.user.username=data.username;
+            if(this.user.role=='ADMIN') this.displayedColumns=['name', 'ingredients', 'sizes','card','edit','delete'];
+            else this.displayedColumns=['name', 'ingredients', 'sizes','card'];
+          }
+          else this.displayedColumns=['name', 'ingredients', 'sizes'];
+          
         }
       );
   }
