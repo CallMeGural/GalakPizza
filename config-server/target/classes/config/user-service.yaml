@@ -1,0 +1,31 @@
+server:
+  port: 8081
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/galakpizza
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+#spring.datasource.url=jdbc:postgresql://localhost:5432/galakpizza
+#spring.datasource.username=postgres
+#spring.datasource.password=admin
+#spring.datasource.driver-class-name=org.postgresql.Driver
+#spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+#spring.jpa.hibernate.ddl-auto=create-drop
+#spring.jpa.show-sql=true
+#
+#
+#spring.jackson.serialization.FAIL_ON_EMPTY_BEANS=false
