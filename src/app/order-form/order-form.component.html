@@ -1,0 +1,38 @@
+  <mat-table [dataSource]="pizza" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Nazwa </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="ingredients">
+      <mat-header-cell *matHeaderCellDef> Składniki </mat-header-cell>
+      <mat-cell *matCellDef="let row"> 
+        <ng-container *ngFor="let ingredient of row.ingredients">
+          {{ingredient.name}}
+        </ng-container>  
+      </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="sizes">
+      <mat-header-cell *matHeaderCellDef> Rozmiar </mat-header-cell>
+      <mat-cell *matCellDef="let row"> 
+        <ng-container *ngFor="let size of row.sizeAndCosts">
+          Rozmiar: {{size.size}}cm, Cena: {{size.cost}}zł
+        </ng-container>  
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="remove">
+      <mat-header-cell *matHeaderCellDef>Koszyk</mat-header-cell>
+      <mat-cell *matCellDef="let pizza">
+        <button mat-button (click)="deleteFromOrder(pizza)">Usuń</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['name', 'ingredients', 'sizes','remove']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['name', 'ingredients', 'sizes','remove']"></mat-row>
+  </mat-table>
+  <div>
+    <button mat-raised-button routerLink="/orders/payment">Przejdz do płatności</button>
+</div>

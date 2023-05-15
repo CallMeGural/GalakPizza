@@ -1,0 +1,53 @@
+<h1 mat-dialog-title>Płatność</h1>
+<div mat-dialog-content>
+    <form [formGroup]="paymentForm">
+        <div>
+          <mat-form-field appearance="fill">
+              <mat-label>Imię</mat-label>
+                  <input matInput required formControlName="firstname" name="firstname" id="firstname" [value]="this.user.firstname">
+                  <div *ngIf="paymentForm.get('firstname')?.invalid && (paymentForm.get('firstname')?.dirty || paymentForm.get('firstname')?.touched)">
+                    <div *ngIf="paymentForm.get('firstname')?.hasError('required')">Imię jest wymagane</div>
+                  </div>
+            </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="fill">
+              <mat-label>Nazwisko</mat-label>
+                  <input matInput required formControlName="lastname" name="lastname" [value]="this.user.lastname">
+                  <div *ngIf="paymentForm.get('lastname')?.invalid && (paymentForm.get('lastname')?.dirty || paymentForm.get('lastname')?.touched)">
+                    <div *ngIf="paymentForm.get('lastname')?.hasError('required')">Nazwisko jest wymagane</div>
+                  </div>
+            </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="fill">
+              <mat-label>Miasto</mat-label>
+                  <input matInput type="text" formControlName="city" required name="city" id="city">
+                  <div *ngIf="paymentForm.get('city')?.invalid && (paymentForm.get('city')?.dirty || paymentForm.get('city')?.touched)">
+                    <div *ngIf="paymentForm.get('city')?.hasError('required')">Miasto jest wymagane</div>
+                  </div>
+            </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="fill">
+              <mat-label>Ulica i numer domu</mat-label>
+                  <input matInput type="text" formControlName="street" required name="street" id="street">
+                  <div *ngIf="paymentForm.get('street')?.invalid && (paymentForm.get('street')?.dirty || paymentForm.get('street')?.touched)">
+                    <div *ngIf="paymentForm.get('street')?.hasError('required')">Ulica jest wymagana</div>
+                  </div>
+            </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="fill">
+              <mat-label>Kod pocztowy</mat-label>
+                  <input matInput type="text" formControlName="zip" required name="zip" id="zip">
+                  <div *ngIf="paymentForm.get('zip')?.invalid && (paymentForm.get('zip')?.dirty || paymentForm.get('zip')?.touched)">
+                    <div *ngIf="paymentForm.get('zip')?.hasError('required')">Kod pocztowy jest wymagany</div>
+                  </div>
+            </mat-form-field>
+        </div>
+      </form>
+<form class = "stripe-custom">
+    <div #cardElement stripe-card class = "card-custom"></div>
+    <button class ="button-custom" (click)="confirmPayment($event)">Zapłać</button>
+  </form>

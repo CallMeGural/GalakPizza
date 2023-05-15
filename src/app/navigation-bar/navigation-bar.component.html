@@ -1,0 +1,16 @@
+<div class = "sticky-top d-block">
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid local-navbar">
+          <a *ngIf="!storageService.isLoggedIn()" (click)="openRegisterDialog()" class="btn btn-info" >Rejestracja</a>
+          <a *ngIf="!storageService.isLoggedIn()" (click)="openLoginDialog()" class="btn btn-info" >Logowanie</a>
+          <a *ngIf="storageService.isLoggedIn()" (click)="logout()" routerLink="/" class="btn btn-info" >Wyloguj się</a>
+          <a routerLink="/pizza" class="btn btn-info" >Lista piccuni</a>
+          <a *ngIf="storageService.isLoggedIn()" routerLink="/pizza/create" class="btn btn-info">Stwórz własną</a>
+          <a *ngIf="(user$ | async)?.role==='ADMIN'" routerLink="/ingredient/create" class="btn btn-info">Dodaj składnik</a>
+          <a *ngIf="(user$ | async)?.role==='ADMIN'" routerLink="admin/orders" class="btn btn-info">Zamówienia</a>
+          <a *ngIf="(user$ | async)?.role==='USER'" routerLink="/pizza/user" class="btn btn-info">Twoje pizze</a>
+          <a *ngIf="(user$ | async)?.role==='USER'" routerLink="/orders/current" class="btn btn-info">Koszyk</a>
+          <a *ngIf="(user$ | async)?.role==='USER'" routerLink="user/orders" class="btn btn-info">Zamówienia</a>
+        </div>
+      </nav>
+</div>

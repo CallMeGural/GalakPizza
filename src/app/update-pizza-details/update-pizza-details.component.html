@@ -1,0 +1,94 @@
+<!-- <mat-horizontal-stepper linear #stepper>
+  <mat-step [stepControl]="proteinAndVeggies">
+        <ng-template matStepLabel>Wybierz składniki</ng-template>
+          <mat-selection-list #proteins class="picker" (selectionChange)="setProteins(proteins.selectedOptions.selected)">
+              <mat-label>Składniki mięsne (max. 2)</mat-label>
+              <div *ngFor="let ingredient of ingredients">
+                  <mat-list-option #protein *ngIf="ingredient.type=='PROTEIN'" [value]="ingredient" 
+                  [disabled]="proteins.selectedOptions.selected.length > 1  && !protein.selected"
+                  [selected]="pizza.ingredients.includes(ingredient)">
+                          {{ingredient.name}}     
+                  </mat-list-option>        
+              </div>
+            </mat-selection-list>
+            <mat-selection-list #veg class="picker" (selectionChange)="setVeggies(veg.selectedOptions.selected)">
+              <mat-label>Warzywa (max. 3)</mat-label>
+              <div *ngFor="let ingredient of ingredients">
+                  <mat-list-option #veggie *ngIf="ingredient.type=='VEGGIES'" [value]="ingredient"
+                  [disabled]="veg.selectedOptions.selected.length > 4  && !veggie.selected"
+                  [selected]="pizza.ingredients.includes(ingredient)">
+                          {{ingredient.name}}     
+                  </mat-list-option>        
+              </div>
+            </mat-selection-list>
+        <div style="clear: both;">
+          <button mat-button matStepperNext>Następne</button>
+        </div>
+    </mat-step>
+      <ng-template matStepLabel>Utwórz</ng-template>
+      <p>Bazą każdej pizzy jest sos pomidorowy i ser mozarella</p>
+      <mat-checkbox (change)="setIfSave($event.checked)">Zapisz własną pizzę</mat-checkbox>
+      <div>
+        <button mat-button matStepperPrevious>Cofnij</button>
+        <button mat-button (click)="saveCustomPizza()">Dodaj do koszyka</button>
+      </div>
+</mat-horizontal-stepper> -->
+<mat-horizontal-stepper>
+  <mat-step [stepControl]="proteinAndVeggies">
+    <ng-template matStepLabel>Wybierz składniki</ng-template>
+    <mat-selection-list #veggies class="picker" (selectionChange)="setVeggies($event)">
+      <div  *ngFor="let ingredient of ingredientList">
+        <mat-list-option #veggie *ngIf="ingredient.type=='VEGGIES'" [value]="ingredient" [selected]="isIngredientSelected(ingredient)"
+        [disabled]="veggies.selectedOptions.selected.length > 3  && !veggie.selected">
+          {{ ingredient.name }}
+        </mat-list-option>
+      </div>
+    </mat-selection-list>
+
+    <mat-selection-list #proteins class="picker" (selectionChange)="setProteins($event)">
+      <div  *ngFor="let ingredient of ingredientList">
+        <mat-list-option #protein *ngIf="ingredient.type=='PROTEIN'" [value]="ingredient" [selected]="isIngredientSelected(ingredient)"
+        [disabled]="proteins.selectedOptions.selected.length > 1  && !protein.selected">
+          {{ ingredient.name }}
+        </mat-list-option>
+      </div>
+    </mat-selection-list>
+      
+    <div style="clear: both;">
+      <button mat-button matStepperNext>Następne</button>
+    </div>  
+
+  </mat-step>
+  
+  <mat-step>
+    <ng-template matStepLabel>Nazwa i rozmiary</ng-template>
+    <div>
+      <mat-form-field>
+        <mat-label>Nazwa pizzy</mat-label>
+        <input matInput type="text" #nameInput [value]="pizza?.name">
+      </mat-form-field>
+    </div>
+    
+      <mat-form-field style="padding: 5px;">
+        <mat-label>{{pizza.sizeAndCosts[0].size}}cm</mat-label>
+        <input matInput type="number" #size0input [value]="!pizza.sizeAndCosts[0]">
+      </mat-form-field>
+      <mat-form-field style="padding: 5px;">
+        <mat-label>{{pizza.sizeAndCosts[1].size}}cm</mat-label>
+        <input matInput type="number" #size1input [value]="!pizza.sizeAndCosts[1]">
+      </mat-form-field>
+      <mat-form-field style="padding: 5px;">
+        <mat-label>{{pizza.sizeAndCosts[2].size}}cm</mat-label>
+        <input matInput type="number" #size2input [value]="!pizza.sizeAndCosts[2]">
+      </mat-form-field>
+    
+    <div>
+      <button mat-button matStepperPrevious>Cofnij</button>
+      <button mat-button (click)="onSubmit(nameInput.value,size0input.value,size1input.value,size2input.value)">Zapisz zmiany</button>
+    </div>
+  </mat-step> 
+
+
+</mat-horizontal-stepper>
+
+

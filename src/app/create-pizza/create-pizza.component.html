@@ -1,0 +1,74 @@
+<mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="proteinAndVeggies">
+          <ng-template matStepLabel>Wybierz składniki</ng-template>
+            <mat-selection-list #proteins class="picker" (selectionChange)="setProteins(proteins.selectedOptions.selected)">
+                <mat-label>Składniki mięsne (max. 2)</mat-label>
+                <div *ngFor="let ingredient of ingredients">
+                    <mat-list-option #protein *ngIf="ingredient.type=='PROTEIN'" [value]="ingredient" 
+                    [disabled]="proteins.selectedOptions.selected.length > 1  && !protein.selected">
+                            {{ingredient.name}}     
+                    </mat-list-option>        
+                </div>
+              </mat-selection-list>
+              <mat-selection-list #veggies class="picker" (selectionChange)="setVeggies(veggies.selectedOptions.selected)">
+                <mat-label>Warzywa (max. 3)</mat-label>
+                <div *ngFor="let ingredient of ingredients">
+                    <mat-list-option #veggie *ngIf="ingredient.type=='VEGGIES'" [value]="ingredient"
+                    [disabled]="veggies.selectedOptions.selected.length > 3  && !veggie.selected">
+                            {{ingredient.name}}     
+                    </mat-list-option>        
+                </div>
+              </mat-selection-list>
+          <div style="clear: both;">
+            <button mat-button matStepperNext>Następne</button>
+          </div>
+      </mat-step>
+      <mat-step *ngIf="user.role==='USER'">
+        <ng-template matStepLabel>Utwórz</ng-template>
+        <p>Bazą każdej pizzy jest sos pomidorowy i ser mozarella</p>
+        <mat-form-field appearance="fill">
+          <mat-label>Rozmiar</mat-label>
+          <mat-select #size (selectionChange)="setSize($event.value)">
+              <div *ngFor="let size of sizeAndCosts">
+                  <mat-option [value]="size">{{size.size}}cm, {{size.cost}}zł</mat-option>
+              </div>
+          </mat-select>
+        </mat-form-field>
+        <mat-checkbox (change)="setIfSave($event.checked)">Zapisz własną pizzę</mat-checkbox>
+        <div>
+          <button mat-button matStepperPrevious>Cofnij</button>
+          <button mat-button (click)="saveCustomPizza()">Dodaj do koszyka</button>
+        </div>
+      </mat-step>
+      <mat-step *ngIf="user.role==='ADMIN'">
+        <ng-template matStepLabel>Utwórz</ng-template>
+        <p>Bazą każdej pizzy jest sos pomidorowy i ser mozarella</p>
+        <mat-dialog-content>
+          <h2>Rozmiary i cena</h2>
+          <form [formGroup]="sizeCostForm">
+            <mat-form-field>
+              <mat-label>Nazwa pizzy</mat-label>
+              <input matInput type="text" id="pizzaName" name="pizzaName" class="form-control" formControlName="pizzaName">
+            </mat-form-field>
+            <div>
+              <mat-form-field style="padding: 5px;">
+                <mat-label>{{sizeAdmin[0].size}}cm</mat-label>
+                <input matInput type="number" id="cost1" name="cost1" class="form-control" formControlName="cost1">
+              </mat-form-field>
+              <mat-form-field style="padding: 5px;">
+                <mat-label>{{sizeAdmin[1].size}}cm</mat-label>
+                <input matInput type="number" id="cost2" name="cost2" class="form-control" formControlName="cost2">
+              </mat-form-field>
+              <mat-form-field style="padding: 5px;">
+                <mat-label>{{sizeAdmin[2].size}}cm</mat-label>
+                <input matInput type="number" id="cost3" name="cost3" class="form-control" formControlName="cost3">
+              </mat-form-field>
+            </div>
+          </form>
+        </mat-dialog-content>
+        <div>
+          <button mat-button matStepperPrevious>Cofnij</button>
+          <button mat-button (click)="saveCustomPizza()">Dodaj nową pizzę</button>
+        </div>
+      </mat-step>
+  </mat-horizontal-stepper>

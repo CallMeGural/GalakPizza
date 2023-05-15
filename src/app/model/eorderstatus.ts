@@ -1,0 +1,5 @@
+export enum EOrderStatus {
+    OPLACONY ='OPLACONY',
+    W_TRAKCIE_DOSTAWY='W_TRAKCIE_DOSTAWY',
+    ZAKONCZONY='ZAKONCZONY'
+}

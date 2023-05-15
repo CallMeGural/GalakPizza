@@ -1,0 +1,46 @@
+<mat-table [dataSource]="orders" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="pizza">
+      <mat-header-cell *matHeaderCellDef>Zamówione pizze</mat-header-cell>
+      <mat-cell *matCellDef="let row"> 
+        <ng-container *ngFor="let pizza of row.pizzas">
+          {{pizza.name}}<br/>
+        </ng-container>  
+      </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="cost">
+      <mat-header-cell *matHeaderCellDef>Całkowity koszt</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.cost}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="user">
+        <mat-header-cell *matHeaderCellDef>Zamawiający</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.client.firstname}} {{row.client.lastname}}<br/>
+            {{row.address.street}} {{row.address.zip}} {{row.address.city}}</mat-cell>
+      </ng-container>
+  
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.status}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="data">
+        <mat-header-cell *matHeaderCellDef>Data zamówienia</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.placedAt | date:"HH:mm:ss dd/MM/yyyy"}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef>Edytuj status</mat-header-cell>
+        <mat-cell *matCellDef="let row" >
+            <mat-select [(value)]="row.status" (valueChange)="onStatusChange(row)">
+                <mat-option value="OPLACONY">Opłacony</mat-option>
+                <mat-option value="W_TRAKCIE_DOSTAWY">W trakcie dostawy</mat-option>
+                <mat-option value="ZAKONCZONY">Zakończony</mat-option>
+            </mat-select>
+        </mat-cell>
+    </ng-container>
+    
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
