@@ -19,7 +19,7 @@ public class PaymentController {
 
     @PostMapping({"/create-payment-intent/{amount}"})
     public String createPaymentIntent(@PathVariable double amount) throws StripeException {
-        Stripe.apiKey = "sk_test_51MvQE4KF6BtFLQH3mg8QEcWuDH3XXg6ttfkd2cLsbqjqZZjSrG2tjj6VoR6nN1KTOnpujCriiKxuSOj0f5JJoyXo00MOlC5wNS";
+        Stripe.apiKey = "YOUR_STRIPE_KEY";
         PaymentIntentCreateParams params = PaymentIntentCreateParams.builder().setAmount((long)amount).setCurrency("pln").build();
         PaymentIntent paymentIntent = PaymentIntent.create(params);
         Map<String, Object> responseData = new HashMap();
